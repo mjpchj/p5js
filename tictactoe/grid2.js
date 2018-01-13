@@ -1,7 +1,7 @@
 
 //GLOBAL VARIABLES
 let grid;
-let g = 3;
+let g = 4;
 let cols = g;
 let rows = g;
 let sumRow;
@@ -28,7 +28,7 @@ function symbols(s, x, y) { //function to draw symbols
 
 	let symsize = length/(2*g); //symbol size
 
-    //top left
+    //top left position
     let px = (windowWidth/2) + symsize - (length/2); 
     let py = (windowHeight/2) + symsize - (length/2);
 	
@@ -55,13 +55,13 @@ function mousePressed() {
 }
 
 function clicked() {
-
-    
-     
-    var px = (windowWidth/2)-(length/2) //initial left x position
-    var py = (windowHeight/2)-(length/2) //initial left y position
+ 
+    let px = (windowWidth/2)-(length/2) //initial left x position
+    let py = (windowHeight/2)-(length/2) //initial left y position
 
 	if (mouseX > px && mouseX < px+length && mouseY > py && mouseY < py+length) { //within grid
+
+        full += 1;
 
         xlocation = floor((mouseX-px)/(length/g)) //converts where mouse is on grid to integer 
        	ylocation = floor((mouseY-py)/(length/g)) //converts where mouse is on grid to integer
@@ -74,9 +74,14 @@ function clicked() {
 
         if(sumRow >= g || sumCol >= g || sumDiagTop >= g || sumDiagBot >= g) { //clear array is game was won on last click
             grid = make2DArray(cols, rows);
-        }  
-   
+            full = 0;
+        } 
 
+        if (full >= (g*g)+1) {
+            grid = make2DArray(cols, rows);
+            full = 0;
+        } 
+   
         //CHECK FOR WINNING CRITERIA
 
         sumRow = 0; //as game not won, resets counter
@@ -141,6 +146,14 @@ function setup() {
     createCanvas(windowWidth, windowHeight); //creates canvas
 
 	grid = make2DArray(cols, rows); //create 2D array
+
+    var params = getURLParams();
+    
+    if(params.g >= 3 && params.g <= 5) {
+
+        g = params.g;
+    }
+
 }
 
 function draw() {
