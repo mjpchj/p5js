@@ -2,12 +2,9 @@ let grid;
 let length = 500;
 let currentSymbol = 0;
 let symbolText = 'Noughts'; 
-<<<<<<< HEAD
-=======
 let g = 3;
 let cols = g;
 let rows = g;
->>>>>>> 843b60cf50748ca8e20a00445ce329a13c6a2267
 let sumRow;
 let sumCol;
 let sumDiagTop;
@@ -68,13 +65,9 @@ function clicked() {
  
     let px = (windowWidth/2)-(length/2) //initial left x position
     let py = (windowHeight/2)-(length/2) //initial left y position
-<<<<<<< HEAD
-=======
-  
      
     var px = (windowWidth/2)-(length/2) //initial left x position
     var py = (windowHeight/2)-(length/2) //initial left y position
->>>>>>> 843b60cf50748ca8e20a00445ce329a13c6a2267
 
 	if (mouseX > px && mouseX < px+length && mouseY > py && mouseY < py+length) { //within grid
 
@@ -162,10 +155,6 @@ function clicked() {
 function setup() {
     createCanvas(windowWidth, windowHeight); //creates canvas
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 843b60cf50748ca8e20a00445ce329a13c6a2267
 	let params = getURLParams();
 
     if(params.g >= 3 && params.g <= 6) { //option to set grid size through URL parameter
@@ -179,10 +168,8 @@ function setup() {
     
     grid = make2DArray(cols, rows); //create 2D array
  
-<<<<<<< HEAD
 }
-=======
->>>>>>> 843b60cf50748ca8e20a00445ce329a13c6a2267
+
 
 	function draw() {
     background(130, 130, 230); //fills background purple
