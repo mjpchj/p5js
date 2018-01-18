@@ -48,6 +48,15 @@ function mousePressed() {
 }
 
 function clicked() {
+
+    if(params.g >= 3 && params.g <= 6) { //option to set grid size through URL parameter
+        g = params.g;
+    } else {
+        g = 4; //default to for is ULR parameter 3>g<6, or not defined
+    }
+
+    let cols = g;
+    let rows = g;
  
     let px = (windowWidth/2)-(length/2) //initial left x position
     let py = (windowHeight/2)-(length/2) //initial left y position
