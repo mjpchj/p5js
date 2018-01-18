@@ -49,6 +49,8 @@ function mousePressed() {
 
 function clicked() {
 
+    let params = getURLParams();
+
     if(params.g >= 3 && params.g <= 6) { //option to set grid size through URL parameter
         g = params.g;
     } else {
@@ -165,7 +167,16 @@ function setup() {
 function draw() {
     background(130, 130, 230); //fills background purple
 
+    let params = getURLParams();
 
+    if(params.g >= 3 && params.g <= 6) { //option to set grid size through URL parameter
+        g = params.g;
+    } else {
+        g = 4; //default to for is ULR parameter 3>g<6, or not defined
+    }
+
+    let cols = g;
+    let rows = g;
 
     if (sumRow == g || sumCol == g || sumDiagTop == g || sumDiagBot == g) { //alerts of win
         textSize(36); 
