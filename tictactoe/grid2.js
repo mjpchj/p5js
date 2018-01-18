@@ -1,14 +1,10 @@
 let grid;
-<<<<<<< HEAD
 let length = 500;
 let currentSymbol = 0;
 let symbolText = 'Noughts'; 
-let g;
-=======
-let g = 3;
+let g = 4;
 let cols = g;
 let rows = g;
->>>>>>> parent of 16a64a7... FINAL
 let sumRow;
 let sumCol;
 let sumDiagTop;
@@ -55,30 +51,10 @@ function mousePressed() {
 }
 
 function clicked() {
-<<<<<<< HEAD
 
-    let params = getURLParams();
-
-    if(params.g >= 3 && params.g <= 6) { //option to set grid size through URL parameter
-        g = params.g;
-    } else {
-        g = 4; //default to for is ULR parameter 3>=g<=6, or not defined
-    }
-
-    let cols = g;
-    let rows = g;
- 
     let px = (windowWidth/2)-(length/2) //initial left x position
     let py = (windowHeight/2)-(length/2) //initial left y position
      
-=======
->>>>>>> parent of 16a64a7... FINAL
-
-    
-     
-    var px = (windowWidth/2)-(length/2) //initial left x position
-    var py = (windowHeight/2)-(length/2) //initial left y position
-
 	if (mouseX > px && mouseX < px+length && mouseY > py && mouseY < py+length) { //within grid
 
         xlocation = floor((mouseX-px)/(length/g)) //converts where mouse is on grid to integer 
@@ -158,23 +134,11 @@ function clicked() {
 function setup() {
     createCanvas(windowWidth, windowHeight); //creates canvas
 
-<<<<<<< HEAD
-	let params = getURLParams();
-
-    if(params.g >= 3 && params.g <= 6) { //option to set grid size through URL parameter
-        g = params.g;
-    } else {
-        g = 4; //default to for is ULR parameter 3>g<6, or not defined
-    }
-
-    let cols = g;
+let cols = g;
     let rows = g;
     
     grid = make2DArray(cols, rows); //create 2D array
  
-=======
-	grid = make2DArray(cols, rows); //create 2D array
->>>>>>> parent of 16a64a7... FINAL
 }
 
 
@@ -182,12 +146,6 @@ function setup() {
     background(130, 130, 230); //fills background purple
 
     let params = getURLParams();
-
-    if(params.g >= 3 && params.g <= 6) { //option to set grid size through URL parameter
-        g = params.g;
-    } else {
-        g = 4; //default to for is ULR parameter 3>g<6, or not defined
-    }
 
     let cols = g;
     let rows = g;
