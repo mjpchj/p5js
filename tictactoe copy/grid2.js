@@ -1,7 +1,7 @@
 
 //GLOBAL VARIABLES
 let grid;
-let g = 3;
+let g = 4;
 let cols = g;
 let rows = g;
 let sumRow;
@@ -11,6 +11,7 @@ let sumDiagBot;
 let length = 500;
 let currentSymbol = 0;
 let symbolText = 'Noughts'; 
+let full = 0;
 
 //END OF GLOBAL VARIABLES
 
@@ -25,9 +26,12 @@ function make2DArray(cols, rows) { //creates generic 2D array
 
 function symbols(s, x, y) { //function to draw symbols
 
-	let px = (windowWidth/2)-(length/g); //centering
-	let py = (windowHeight/2)-(length/g); //centering
 	let symsize = length/(2*g); //symbol size
+
+    //top left position
+    let px = (windowWidth/2) + symsize - (length/2); 
+    let py = (windowHeight/2) + symsize - (length/2);
+	
 
    	if (s == 0) {
     //symbol O
@@ -51,12 +55,13 @@ function mousePressed() {
 }
 
 function clicked() {
-
-    
-    var px = (windowWidth/2)-(length/2) //initial left x position
-    var py = (windowHeight/2)-(length/2) //initial left y position
+ 
+    let px = (windowWidth/2)-(length/2) //initial left x position
+    let py = (windowHeight/2)-(length/2) //initial left y position
 
 	if (mouseX > px && mouseX < px+length && mouseY > py && mouseY < py+length) { //within grid
+
+        full += 1;
 
         xlocation = floor((mouseX-px)/(length/g)) //converts where mouse is on grid to integer 
        	ylocation = floor((mouseY-py)/(length/g)) //converts where mouse is on grid to integer
@@ -69,9 +74,14 @@ function clicked() {
 
         if(sumRow >= g || sumCol >= g || sumDiagTop >= g || sumDiagBot >= g) { //clear array is game was won on last click
             grid = make2DArray(cols, rows);
-        }  
-   
+            full = 0;
+        } 
 
+        if (full >= (g*g)+1) {
+            grid = make2DArray(cols, rows);
+            full = 0;
+        } 
+   
         //CHECK FOR WINNING CRITERIA
 
         sumRow = 0; //as game not won, resets counter
@@ -100,14 +110,17 @@ function clicked() {
                 }    
             }
         
-        // //add one  to sum for each symbol that matches symbols diagonally bottom-to-top
-        // for (let i = 0; i < g; i++) {
-        //     for (let j = g-1; j > -1; j--){
-        //         if(grid[j][i] == currentSymbol) {
-        //         sumDiagBot += 1;    
-        //         }    
-        //     }
-        // }         
+        //add one  to sum for each symbol that matches symbols diagonally bottom-to-top
+        
+        let k = g;
+
+        for (let i = 0; i < g; i++) {
+            k -=1
+            if(grid[i][k] == currentSymbol) {
+                sumDiagBot += 1    
+                }    
+            }      
+
 
             //ALTERNATE SYMBOLS
         if (currentSymbol == 0){
@@ -120,22 +133,27 @@ function clicked() {
     
 
     //Status of counters for debugging    
-    print('NEW TURN');
-    print('sumRow = ' + sumRow);
-    print('sumCol = ' + sumCol);
-    print('sumDiagTop = ' + sumDiagTop);
-    print('sumDiagBot = ' + sumDiagBot);
+    // print('NEW TURN');
+    // print('sumRow = ' + sumRow);
+    // print('sumCol = ' + sumCol);
+    // print('sumDiagTop = ' + sumDiagTop);
+    // print('sumDiagBot = ' + sumDiagBot);
 
     }
-} // END OF CLICKED
+} // END OF CLICKED()
         
 function setup() {
     createCanvas(windowWidth, windowHeight); //creates canvas
 
-    let px = (windowWidth/2)-length/g; //centering
-	let py = (windowHeight/2)-length/g; //centering
-
 	grid = make2DArray(cols, rows); //create 2D array
+
+    var params = getURLParams();
+    
+    if(params.g >= 3 && params.g <= 5) {
+
+        g = params.g;
+    }
+
 }
 
 function draw() {
@@ -151,34 +169,37 @@ function draw() {
         text('Click to reset.', windowWidth/2, 126);
     }
 
-    let px = (windowWidth/2)-(length/g); //centering
-	let py = (windowHeight/2)-(length/g); //centering
-	let symsize = length/(2*g); //symbol size
+    let symsize = length/(2*g); //symbol size
+
+    let pointX = (windowWidth/2) + symsize - (length/2);
+    let pointY = (windowHeight/2) + symsize - (length/2);
+
 
     //DRAWS GRID
-	for (let i = 1; i < g; i++) {
+    for (let i = 1; i < g; i++) {
 
-		var incr = (length/g)*(i-1) //moves on to next line coordinates
+        let incr = (length/g)*(i-1) //moves on to next line coordinates
 
-		//horizontal line
+        //horizontal line
         stroke(210);
         strokeWeight(12);
         strokeCap(SQUARE);
-        line(px-symsize, py+symsize+incr, px+length-symsize, py+symsize+incr);
-      
+        line(pointX-symsize, pointY+symsize+incr, pointX+length-symsize, pointY+symsize+incr);
+          
         //vertical line
         stroke(210);
         strokeWeight(12);
         strokeCap(SQUARE);
-        line(px+symsize+incr, py-symsize, px+symsize+incr, py+length-symsize);
+        line(pointX+symsize+incr, pointY-symsize, pointX+symsize+incr, pointY+length-symsize);
       
     }
 
     //DRAWS SYMBOLS FROM ARRAY VALUES
     for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
-            let x = i * (500/g);
-            let y = j * (500/g);
+            
+            let x = i * (length/g);
+            let y = j * (length/g);
             symbols(grid[i][j], x, y);
 
         }
