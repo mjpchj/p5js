@@ -1,4 +1,5 @@
- let length = 500;
+let grid;
+let length = 500;
 let currentSymbol = 0;
 let symbolText = 'Noughts'; 
 let sumRow;
@@ -137,10 +138,7 @@ function clicked() {
 function setup() {
     createCanvas(windowWidth, windowHeight); //creates canvas
 
-	let grid;
-   
-   
-    let params = getURLParams();
+	let params = getURLParams();
 
     if(params.g >= 3 && params.g <= 6) { //option to set grid size through URL parameter
         g = params.g;
