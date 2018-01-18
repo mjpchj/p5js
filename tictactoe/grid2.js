@@ -1,8 +1,14 @@
 let grid;
+<<<<<<< HEAD
 let length = 500;
 let currentSymbol = 0;
 let symbolText = 'Noughts'; 
 let g;
+=======
+let g = 3;
+let cols = g;
+let rows = g;
+>>>>>>> parent of 16a64a7... FINAL
 let sumRow;
 let sumCol;
 let sumDiagTop;
@@ -22,7 +28,7 @@ function symbols(s, x, y) { //function to draw symbols
 
 	let symsize = length/(2*g); //symbol size
 
-    //top left position
+    //top left
     let px = (windowWidth/2) + symsize - (length/2); 
     let py = (windowHeight/2) + symsize - (length/2);
 	
@@ -49,6 +55,7 @@ function mousePressed() {
 }
 
 function clicked() {
+<<<<<<< HEAD
 
     let params = getURLParams();
 
@@ -64,10 +71,15 @@ function clicked() {
     let px = (windowWidth/2)-(length/2) //initial left x position
     let py = (windowHeight/2)-(length/2) //initial left y position
      
+=======
+>>>>>>> parent of 16a64a7... FINAL
+
+    
+     
+    var px = (windowWidth/2)-(length/2) //initial left x position
+    var py = (windowHeight/2)-(length/2) //initial left y position
 
 	if (mouseX > px && mouseX < px+length && mouseY > py && mouseY < py+length) { //within grid
-
-        full += 1;
 
         xlocation = floor((mouseX-px)/(length/g)) //converts where mouse is on grid to integer 
        	ylocation = floor((mouseY-py)/(length/g)) //converts where mouse is on grid to integer
@@ -89,14 +101,9 @@ function clicked() {
 
         if(sumRow >= g || sumCol >= g || sumDiagTop >= g || sumDiagBot >= g) { //clear array is game was won on last click
             grid = make2DArray(cols, rows);
-            full = 0;
-        } 
-
-        if (full >= (g*g)+1) {
-            grid = make2DArray(cols, rows);
-            full = 0;
-        } 
+        }  
    
+
         //CHECK FOR WINNING CRITERIA
 
         sumRow = 0; //as game not won, resets counter
@@ -151,6 +158,7 @@ function clicked() {
 function setup() {
     createCanvas(windowWidth, windowHeight); //creates canvas
 
+<<<<<<< HEAD
 	let params = getURLParams();
 
     if(params.g >= 3 && params.g <= 6) { //option to set grid size through URL parameter
@@ -164,6 +172,9 @@ function setup() {
     
     grid = make2DArray(cols, rows); //create 2D array
  
+=======
+	grid = make2DArray(cols, rows); //create 2D array
+>>>>>>> parent of 16a64a7... FINAL
 }
 
 
