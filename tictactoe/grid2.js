@@ -136,7 +136,7 @@ function clicked() {
 
     
 
-    Status of counters for debugging    
+    //Status of counters for debugging    
     print('NEW TURN');
     print('sumRow = ' + sumRow);
     print('sumCol = ' + sumCol);
