@@ -136,12 +136,12 @@ function clicked() {
 
     
 
-    //Status of counters for debugging    
-    // print('NEW TURN');
-    // print('sumRow = ' + sumRow);
-    // print('sumCol = ' + sumCol);
-    // print('sumDiagTop = ' + sumDiagTop);
-    // print('sumDiagBot = ' + sumDiagBot);
+    Status of counters for debugging    
+    print('NEW TURN');
+    print('sumRow = ' + sumRow);
+    print('sumCol = ' + sumCol);
+    print('sumDiagTop = ' + sumDiagTop);
+    print('sumDiagBot = ' + sumDiagBot);
 
     }
 } // END OF CLICKED()
