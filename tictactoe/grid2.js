@@ -1,3 +1,11 @@
+ let length = 500;
+let currentSymbol = 0;
+let symbolText = 'Noughts'; 
+let sumRow;
+let sumCol;
+let sumDiagTop;
+let sumDiagBot;
+let full = 0;  
 
 function make2DArray(cols, rows) { //creates generic 2D array
 
@@ -130,14 +138,7 @@ function setup() {
     createCanvas(windowWidth, windowHeight); //creates canvas
 
 	let grid;
-    let sumRow;
-    let sumCol;
-    let sumDiagTop;
-    let sumDiagBot;
-    let length = 500;
-    let currentSymbol = 0;
-    let symbolText = 'Noughts'; 
-    let full = 0;
+   
    
     let params = getURLParams();
 
@@ -156,6 +157,8 @@ function setup() {
 
 function draw() {
     background(130, 130, 230); //fills background purple
+
+
 
     if (sumRow == g || sumCol == g || sumDiagTop == g || sumDiagBot == g) { //alerts of win
         textSize(36); 
