@@ -2,9 +2,7 @@ let grid;
 let length = 500;
 let currentSymbol = 0;
 let symbolText = 'Noughts'; 
-let g = 3;
-let cols = g;
-let rows = g;
+let g;
 let sumRow;
 let sumCol;
 let sumDiagTop;
@@ -66,8 +64,6 @@ function clicked() {
     let px = (windowWidth/2)-(length/2) //initial left x position
     let py = (windowHeight/2)-(length/2) //initial left y position
      
-    var px = (windowWidth/2)-(length/2) //initial left x position
-    var py = (windowHeight/2)-(length/2) //initial left y position
 
 	if (mouseX > px && mouseX < px+length && mouseY > py && mouseY < py+length) { //within grid
 
