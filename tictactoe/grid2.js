@@ -1,7 +1,6 @@
+
+//GLOBAL VARIABLES
 let grid;
-let length = 500;
-let currentSymbol = 0;
-let symbolText = 'Noughts'; 
 let g = 4;
 let cols = g;
 let rows = g;
@@ -9,7 +8,12 @@ let sumRow;
 let sumCol;
 let sumDiagTop;
 let sumDiagBot;
-let full = 0;  
+let length = 500;
+let currentSymbol = 0;
+let symbolText = 'Noughts'; 
+let full = 0;
+
+//END OF GLOBAL VARIABLES
 
 function make2DArray(cols, rows) { //creates generic 2D array
 
@@ -24,7 +28,7 @@ function symbols(s, x, y) { //function to draw symbols
 
 	let symsize = length/(2*g); //symbol size
 
-    //top left
+    //top left position
     let px = (windowWidth/2) + symsize - (length/2); 
     let py = (windowHeight/2) + symsize - (length/2);
 	
@@ -51,11 +55,13 @@ function mousePressed() {
 }
 
 function clicked() {
-
+ 
     let px = (windowWidth/2)-(length/2) //initial left x position
     let py = (windowHeight/2)-(length/2) //initial left y position
-     
+
 	if (mouseX > px && mouseX < px+length && mouseY > py && mouseY < py+length) { //within grid
+
+        full += 1;
 
         xlocation = floor((mouseX-px)/(length/g)) //converts where mouse is on grid to integer 
        	ylocation = floor((mouseY-py)/(length/g)) //converts where mouse is on grid to integer
@@ -64,22 +70,18 @@ function clicked() {
             //do nothing
         } else {
             grid[xlocation][ylocation] = currentSymbol; //puts current symbol into array at location of click
-
-                //ALTERNATE SYMBOLS
-        if (currentSymbol == 0){
-                currentSymbol = 1;
-                symbolText = 'Noughts';
-        }   else if (currentSymbol == 1){
-                    currentSymbol = 0;
-                    symbolText = 'Crosses';
-            }
         }
 
         if(sumRow >= g || sumCol >= g || sumDiagTop >= g || sumDiagBot >= g) { //clear array is game was won on last click
             grid = make2DArray(cols, rows);
-        }  
-   
+            full = 0;
+        } 
 
+        if (full >= (g*g)+1) {
+            grid = make2DArray(cols, rows);
+            full = 0;
+        } 
+   
         //CHECK FOR WINNING CRITERIA
 
         sumRow = 0; //as game not won, resets counter
@@ -119,14 +121,23 @@ function clicked() {
                 }    
             }      
 
+
+            //ALTERNATE SYMBOLS
+        if (currentSymbol == 0){
+                currentSymbol = 1;
+                symbolText = 'Noughts';
+        }   else if (currentSymbol == 1){
+                    currentSymbol = 0;
+                    symbolText = 'Crosses';
+            }
     
 
     //Status of counters for debugging    
-    print('NEW TURN');
-    print('sumRow = ' + sumRow);
-    print('sumCol = ' + sumCol);
-    print('sumDiagTop = ' + sumDiagTop);
-    print('sumDiagBot = ' + sumDiagBot);
+    // print('NEW TURN');
+    // print('sumRow = ' + sumRow);
+    // print('sumCol = ' + sumCol);
+    // print('sumDiagTop = ' + sumDiagTop);
+    // print('sumDiagBot = ' + sumDiagBot);
 
     }
 } // END OF CLICKED()
@@ -134,21 +145,19 @@ function clicked() {
 function setup() {
     createCanvas(windowWidth, windowHeight); //creates canvas
 
-let cols = g;
-    let rows = g;
+	grid = make2DArray(cols, rows); //create 2D array
+
+    var params = getURLParams();
     
-    grid = make2DArray(cols, rows); //create 2D array
- 
+    if(params.g >= 3 && params.g <= 5) {
+
+        g = params.g;
+    }
+
 }
 
-
-	function draw() {
+function draw() {
     background(130, 130, 230); //fills background purple
-
-    let params = getURLParams();
-
-    let cols = g;
-    let rows = g;
 
     if (sumRow == g || sumCol == g || sumDiagTop == g || sumDiagBot == g) { //alerts of win
         textSize(36); 
