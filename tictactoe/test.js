@@ -62,7 +62,7 @@ function draw() {
 
 
  		//DRAWS GRID
-		for (let i = 1; i < g; i++) {
+	for (let i = 1; i < g; i++) {
 
 		let incr = (length/g)*(i-1) //moves on to next line coordinates
 
