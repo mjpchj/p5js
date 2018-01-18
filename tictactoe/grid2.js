@@ -1,13 +1,10 @@
 let grid;
-<<<<<<< HEAD
 let length = 500;
 let currentSymbol = 0;
 let symbolText = 'Noughts'; 
-=======
 let g = 3;
 let cols = g;
 let rows = g;
->>>>>>> parent of 16a64a7... FINAL
 let sumRow;
 let sumCol;
 let sumDiagTop;
@@ -54,7 +51,6 @@ function mousePressed() {
 }
 
 function clicked() {
-<<<<<<< HEAD
 
     let params = getURLParams();
 
@@ -69,10 +65,7 @@ function clicked() {
  
     let px = (windowWidth/2)-(length/2) //initial left x position
     let py = (windowHeight/2)-(length/2) //initial left y position
-=======
->>>>>>> parent of 16a64a7... FINAL
-
-    
+  
      
     var px = (windowWidth/2)-(length/2) //initial left x position
     var py = (windowHeight/2)-(length/2) //initial left y position
@@ -156,7 +149,7 @@ function clicked() {
 function setup() {
     createCanvas(windowWidth, windowHeight); //creates canvas
 
-<<<<<<< HEAD
+
 	let params = getURLParams();
 
     if(params.g >= 3 && params.g <= 6) { //option to set grid size through URL parameter
@@ -170,12 +163,8 @@ function setup() {
     
     grid = make2DArray(cols, rows); //create 2D array
  
-=======
-	grid = make2DArray(cols, rows); //create 2D array
->>>>>>> parent of 16a64a7... FINAL
-}
 
-function draw() {
+	function draw() {
     background(130, 130, 230); //fills background purple
 
     let params = getURLParams();
