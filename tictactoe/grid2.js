@@ -1,20 +1,4 @@
 
-//GLOBAL VARIABLES
-let grid;
-let g = 4;
-let cols = g;
-let rows = g;
-let sumRow;
-let sumCol;
-let sumDiagTop;
-let sumDiagBot;
-let length = 500;
-let currentSymbol = 0;
-let symbolText = 'Noughts'; 
-let full = 0;
-
-//END OF GLOBAL VARIABLES
-
 function make2DArray(cols, rows) { //creates generic 2D array
 
 	let arr = new Array(cols);
@@ -70,6 +54,15 @@ function clicked() {
             //do nothing
         } else {
             grid[xlocation][ylocation] = currentSymbol; //puts current symbol into array at location of click
+
+                //ALTERNATE SYMBOLS
+        if (currentSymbol == 0){
+                currentSymbol = 1;
+                symbolText = 'Noughts';
+        }   else if (currentSymbol == 1){
+                    currentSymbol = 0;
+                    symbolText = 'Crosses';
+            }
         }
 
         if(sumRow >= g || sumCol >= g || sumDiagTop >= g || sumDiagBot >= g) { //clear array is game was won on last click
@@ -121,15 +114,6 @@ function clicked() {
                 }    
             }      
 
-
-            //ALTERNATE SYMBOLS
-        if (currentSymbol == 0){
-                currentSymbol = 1;
-                symbolText = 'Noughts';
-        }   else if (currentSymbol == 1){
-                    currentSymbol = 0;
-                    symbolText = 'Crosses';
-            }
     
 
     //Status of counters for debugging    
@@ -145,15 +129,29 @@ function clicked() {
 function setup() {
     createCanvas(windowWidth, windowHeight); //creates canvas
 
-	grid = make2DArray(cols, rows); //create 2D array
+	let grid;
+    let sumRow;
+    let sumCol;
+    let sumDiagTop;
+    let sumDiagBot;
+    let length = 500;
+    let currentSymbol = 0;
+    let symbolText = 'Noughts'; 
+    let full = 0;
+   
+    let params = getURLParams();
 
-    var params = getURLParams();
-    
-    if(params.g >= 3 && params.g <= 5) {
-
+    if(params.g >= 3 && params.g <= 6) { //option to set grid size through URL parameter
         g = params.g;
+    } else {
+        g = 4; //default to for is ULR parameter 3>g<6, or not defined
     }
 
+    let cols = g;
+    let rows = g;
+    
+    grid = make2DArray(cols, rows); //create 2D array
+ 
 }
 
 function draw() {
